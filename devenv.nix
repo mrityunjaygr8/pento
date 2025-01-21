@@ -9,7 +9,8 @@
   env.GREET = "devenv";
 
   # https://devenv.sh/packages/
-  packages = with pkgs; [git inotify-tools];
+  packages = with pkgs; [git] ++ lib.optionals pkgs.stdenv.isLinux [pkgs.inotify-tools];
+
 
   # https://devenv.sh/languages/
   languages.elixir.enable = true;
