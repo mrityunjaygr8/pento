@@ -20,6 +20,9 @@
   # https://devenv.sh/services/
   services.postgres = {
     listen_addresses = "127.0.0.1";
+    initialScript = ''
+      CREATE USER postgres WITH SUPERUSER PASSWORD 'dr0w.Ssap';
+    '';
     enable = true;
     initialDatabases = [
       {
