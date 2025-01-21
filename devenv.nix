@@ -60,4 +60,6 @@
   # pre-commit.hooks.shellcheck.enable = true;
 
   # See full reference at https://devenv.sh/reference/options/
+
+  cachix.enable = if pkgs.stdenv.isDarwin then false else true;
 }
