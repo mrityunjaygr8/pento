@@ -18,7 +18,7 @@ defmodule PentoWeb.Router do
   end
 
   scope "/", PentoWeb do
-    pipe_through [ :browser, :redirect_authenticated_user_to_guess_live ]
+    pipe_through [ :browser ]
 
     get "/", PageController, :home
   end
