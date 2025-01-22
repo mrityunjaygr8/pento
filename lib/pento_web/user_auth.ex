@@ -146,11 +146,11 @@ defmodule PentoWeb.UserAuth do
       end
   """
   def on_mount(:mount_current_user, _params, session, socket) do
-    {:cont, mount_current_user(socket, session)}
+    {:cont, socket |> mount_current_user(session) |> mount_session_id(session)}
   end
 
   def on_mount(:ensure_authenticated, _params, session, socket) do
-    socket = mount_current_user(socket, session)
+    socket = socket |>  mount_current_user(session) |> mount_session_id(session)
 
     if socket.assigns.current_user do
       {:cont, socket}
@@ -166,6 +166,8 @@ defmodule PentoWeb.UserAuth do
 
   def on_mount(:redirect_if_user_is_authenticated, _params, session, socket) do
     socket = mount_current_user(socket, session)
+    socket = mount_session_id(socket, session)
+
 
     if socket.assigns.current_user do
       {:halt, Phoenix.LiveView.redirect(socket, to: signed_in_path(socket))}
@@ -182,6 +184,11 @@ defmodule PentoWeb.UserAuth do
     end)
   end
 
+  defp mount_session_id(socket, session) do
+    Phoenix.Component.assign_new(socket, :session_id, fn ->
+      session["live_socket_id"]
+    end)
+  end
   @doc """
   Used for routes that require the user to not be authenticated.
   """
@@ -190,6 +197,14 @@ defmodule PentoWeb.UserAuth do
       conn
       |> redirect(to: signed_in_path(conn))
       |> halt()
+    else
+      conn
+    end
+  end
+
+  def redirect_authenticated_user_to_guess_live(conn, _opts) do
+    if conn.assigns[:current_user] do
+      redirect(conn, to: "/guess")
     else
       conn
     end

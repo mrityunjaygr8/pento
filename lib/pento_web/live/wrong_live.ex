@@ -1,14 +1,12 @@
 defmodule PentoWeb.WrongLive do
   use PentoWeb, :live_view
-  alias Pento.Accounts
 
-  def mount(_params, session, socket) do
+  def mount(_params, _session, socket) do
     {:ok,
      assign(socket,
        score: 0,
        message: "Make a guess:",
-       correct: generate_correct(),
-       session_id: session["live_socket_id"]
+       correct: generate_correct()
      )}
   end
 
@@ -19,7 +17,7 @@ defmodule PentoWeb.WrongLive do
     <h2>{@message}</h2>
     <h2>{@correct}</h2>
     <h2>{@session_id}</h2>
-    <h2>{@current_user.email}</h2>
+    <h2>{@current_user.username}</h2>
     <h2>
       <%= for n <- 1..10 do %>
         <.link href="#" phx-click="guess" phx-value-number={n}>
