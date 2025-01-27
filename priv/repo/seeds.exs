@@ -30,9 +30,9 @@ products = [
     description: "You know what it is",
     sku: 1_222_324,
     unit_price: 12.00
-  },
+  }
 ]
 
-Enum.each(products, fn product -> 
+Enum.each(products, fn product ->
   Catalog.create_product(product)
 end)

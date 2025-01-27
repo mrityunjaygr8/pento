@@ -18,7 +18,7 @@ defmodule PentoWeb.Router do
   end
 
   scope "/", PentoWeb do
-    pipe_through [ :browser ]
+    pipe_through [:browser]
 
     get "/", PageController, :home
   end

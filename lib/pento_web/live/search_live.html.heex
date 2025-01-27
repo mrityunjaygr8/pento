@@ -5,12 +5,7 @@
 <div>
   <h2>Search for products</h2>
 
-  <.simple_form
-    for={@form}
-    id="search-form"
-    phx-change="validate"
-    phx-submit="save"
-    >
+  <.simple_form for={@form} id="search-form" phx-change="validate" phx-submit="save">
     <.input field={@form[:term]} type="text" label="Search by SKU" />
     <:actions>
       <.button phx-disable-with="Searching...">Search</.button>

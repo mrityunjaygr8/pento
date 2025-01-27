@@ -7,7 +7,12 @@ defmodule Pento.CatalogFixtures do
   @doc """
   Generate a unique product sku.
   """
-  def unique_product_sku, do: System.unique_integer([:positive])
+  def unique_product_sku() do
+    Stream.iterate(1_000_000, &(&1 + 1))
+    |> Stream.take_while(&(&1 <= 9_999_999))
+    |> Stream.reject(&MapSet.member?(MapSet.new(), &1))
+    |> Enum.random()
+  end
 
   @doc """
   Generate a product.

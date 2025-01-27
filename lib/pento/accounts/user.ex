@@ -106,6 +106,7 @@ defmodule Pento.Accounts.User do
       changeset
     end
   end
+
   @doc """
   A user changeset for changing the email.
 

@@ -4,8 +4,18 @@ defmodule PentoWeb.ProductLiveTest do
   import Phoenix.LiveViewTest
   import Pento.CatalogFixtures
 
-  @create_attrs %{description: "some description", name: "some name", sku: 42, unit_price: 120.5}
-  @update_attrs %{description: "some updated description", name: "some updated name", sku: 43, unit_price: 456.7}
+  @create_attrs %{
+    description: "some description",
+    name: "some name",
+    sku: 4_200_000,
+    unit_price: 120.5
+  }
+  @update_attrs %{
+    description: "some updated description",
+    name: "some updated name",
+    sku: 4_300_000,
+    unit_price: 456.7
+  }
   @invalid_attrs %{description: nil, name: nil, sku: nil, unit_price: nil}
 
   defp create_product(_) do

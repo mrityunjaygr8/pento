@@ -5,6 +5,5 @@ defmodule Pento.Repo.Migrations.AccountUsersAddUsername do
     alter table(:users) do
       add :username, :string
     end
-
   end
 end
